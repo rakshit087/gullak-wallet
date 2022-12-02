@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
+    "preview": "vite preview",
+    "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
+  },  
   "dependencies": {
     "@chakra-ui/react": "^2.4.2",
     "@emotion/react": "^11.10.5",
@@ -16,8 +17,11 @@
     "@web3auth/core": "^3.2.0",
     "@web3auth/openlogin-adapter": "^3.2.0",
     "framer-motion": "^7.6.18",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.4",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
+    "prettier": "^2.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
@@ -28,8 +32,18 @@
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
+    "eslint": "^8.29.0",
+    "eslint-plugin-react": "^7.31.11",
     "typescript": "^4.6.4",
     "vite": "^3.2.3",
     "vite-plugin-pwa": "^0.13.3"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": ["prettier --write ."]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
