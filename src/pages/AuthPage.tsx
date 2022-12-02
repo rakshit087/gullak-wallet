@@ -1,4 +1,6 @@
 import { Button, Flex } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react'
+import { FaTwitter } from "react-icons/fa";
 
 export const AuthPage = () => {
   return (
@@ -9,7 +11,9 @@ export const AuthPage = () => {
       justifyContent={'center'}
       alignItems={'center'}
     >
-      <Button colorScheme={"twitter"} >Continue with Twitter</Button>
+        <Button colorScheme='twitter' leftIcon={<FaTwitter />}>
+    Continue with Twitter
+  </Button>
     </Flex>
   );
 };
