@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import { ChakraProvider } from '@chakra-ui/react';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import { AuthPage } from './pages/AuthPage';
+import App from './App';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ChakraProvider>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>
 );
