@@ -78,8 +78,18 @@ export function getJsonRpcProvider() {
 
 export function getAdapter(account: any) {
   const signer = getJsonRpcProvider().getSigner(account);
-  return new EthersAdapter({ ethers, signer: signer })
+  return new EthersAdapter({ ethers, signerOrProvider: signer })
 }
+
+export async function getSafeSdk(account: any, safeAddress: any) {
+  return await Safe.connect(
+    {
+      ethAdapter: getAdapter(account),
+      safeAddress: safeAddress,
+    }
+  );
+}
+
 
 export async function main() {
   const accounts = [
