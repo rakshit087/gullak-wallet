@@ -1,10 +1,18 @@
 import { Button, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
-import { AuthService } from '../services/autentication';
+import { useAuthContext } from '../contexts/AuthContext';
 
 export default function AuthPage() {
-
+  const { address, connectGoogle, connectTwitter } = useAuthContext();
+  const router = useRouter();
+  useEffect(() => {
+    if (address) {
+      router.push('/dashboard');
+    }
+  }, [address]);
   return (
     <Flex
       h={'100vh'}
@@ -24,8 +32,7 @@ export default function AuthPage() {
         colorScheme="gray"
         leftIcon={<FaGoogle />}
         onClick={async () => {
-          const authService = new AuthService();
-          await authService.invokeLogin('google');
+          connectGoogle();
         }}
         width={72}
         borderRadius={32}
@@ -37,8 +44,7 @@ export default function AuthPage() {
         colorScheme="twitter"
         leftIcon={<FaTwitter />}
         onClick={async () => {
-          const authService = new AuthService();
-          await authService.invokeLogin('twitter');
+          connectTwitter();
         }}
         width={72}
         borderRadius={32}
