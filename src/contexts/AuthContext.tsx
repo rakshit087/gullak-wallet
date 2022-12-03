@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }: any) => {
       adapterSettings: {
         network: 'testnet',
         clientId: 'BDBRmPiihu9XDyawpU1xXD2wVpEg_XG1ZNsz2RVc910qTU-MrMvuVig6khEBNSGxJw5bjjywcZQO7GdjcwrJhAM',
-        uxMode: 'redirect',
+        uxMode: 'popup',
         loginConfig: {
           google: {
             name: 'google auth',
@@ -82,36 +82,44 @@ export const AuthProvider = ({ children }: any) => {
         await web3AuthCore?.logout()
         await web3AuthCore?.connectTo(adapter.name, { loginProvider: 'google' });
       } 
+  
     } catch {
       await web3AuthCore?.connectTo(adapter.name, { loginProvider: 'google' });
+    }
+    if (web3AuthCore?.provider) {
+      const web3Provider = new ethers.providers.Web3Provider(web3AuthCore?.provider);
+      setProvider(web3Provider);
+      const signer = web3Provider.getSigner();
+      const address = await signer.getAddress();
+      setAccount(address);
     }
   }, [web3AuthCore]);
 
   const connectWithTwitter = useCallback(async () => {
-    const adapter = new OpenloginAdapter({
-      adapterSettings: {
-        network: 'testnet',
-        clientId: 'BDBRmPiihu9XDyawpU1xXD2wVpEg_XG1ZNsz2RVc910qTU-MrMvuVig6khEBNSGxJw5bjjywcZQO7GdjcwrJhAM',
-        uxMode: 'popup',
-        loginConfig: {
-          jwt: {
-            name: 'any name',
-            verifier: 'gullak-twitter-auth',
-            typeOfLogin: 'jwt',
-            clientId: 'EfCALmlkrAAtUw8N94aRii2wVqNgzm4p',
-          },
-        },
-      },
-    });
-    web3AuthCore?.configureAdapter(adapter);
-    await web3AuthCore?.init();
-    await web3AuthCore?.connectTo(adapter.name, {
-      loginProvider: 'jwt',
-      extraLoginOptions: {
-        domain: 'https://dev-3a3ecbqhdt00k46g.us.auth0.com',
-        verifierIdField: 'sub',
-      },
-    });
+    // const adapter = new OpenloginAdapter({
+    //   adapterSettings: {
+    //     network: 'testnet',
+    //     clientId: 'BDBRmPiihu9XDyawpU1xXD2wVpEg_XG1ZNsz2RVc910qTU-MrMvuVig6khEBNSGxJw5bjjywcZQO7GdjcwrJhAM',
+    //     uxMode: 'popup',
+    //     loginConfig: {
+    //       jwt: {
+    //         name: 'any name',
+    //         verifier: 'gullak-twitter-auth',
+    //         typeOfLogin: 'jwt',
+    //         clientId: 'EfCALmlkrAAtUw8N94aRii2wVqNgzm4p',
+    //       },
+    //     },
+    //   },
+    // });
+    // web3AuthCore?.configureAdapter(adapter);
+    // await web3AuthCore?.init();
+    // await web3AuthCore?.connectTo(adapter.name, {
+    //   loginProvider: 'jwt',
+    //   extraLoginOptions: {
+    //     domain: 'https://dev-3a3ecbqhdt00k46g.us.auth0.com',
+    //     verifierIdField: 'sub',
+    //   },
+    // });
   }, [web3AuthCore]);
 
   return (

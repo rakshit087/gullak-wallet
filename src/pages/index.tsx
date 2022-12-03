@@ -5,10 +5,9 @@ import { CreateScreen } from '../screens/Create';
 
 import { DashboardScreen } from '../screens/dashboard';
 import { useAuthContext } from '../contexts/AuthContext';
-import dynamic from 'next/dynamic';
 
 export default function Home() {
-  const { address, ethProvider } = useAuthContext();
+  const {address} = useAuthContext();
   return (
     <div>
       <Head>
@@ -22,7 +21,7 @@ export default function Home() {
           href="/favicon.ico"
         />
       </Head>
-      <main>{address != null ? <DashboardScreen /> : <CreateScreen />}</main>
+      <main>{!!address ? <DashboardScreen /> : <AuthScreen />}</main>
     </div>
   );
 }

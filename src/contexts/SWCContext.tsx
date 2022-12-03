@@ -29,6 +29,8 @@ export const SWCProvider = ({ children }: any) => {
           supportedNetworksIds: [ChainId.POLYGON_MUMBAI],
         });
         await smartAccount.init();
+
+        console.log("smartAccount" , smartAccount);
         const context = smartAccount.getSmartAccountContext();
         setScwAddress(context.baseWallet.getAddress());
         setSmartAccount(smartAccount);

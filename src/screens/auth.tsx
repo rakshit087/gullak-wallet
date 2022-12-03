@@ -4,7 +4,7 @@ import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { useAuthContext } from '../contexts/AuthContext';
 
 export const AuthScreen = () => {
-  const {connectGoogle, connectTwitter} = useAuthContext();
+  const {connectGoogle} = useAuthContext();
 
   return (
     <Flex
@@ -36,11 +36,10 @@ export const AuthScreen = () => {
       <Button
         colorScheme="twitter"
         leftIcon={<FaTwitter />}
-        onClick={async () => {
-          await connectTwitter();
-        }}
+        isDisabled
         width={72}
         borderRadius={32}
+
       >
         Continue with Twitter
       </Button>
