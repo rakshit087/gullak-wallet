@@ -14,7 +14,7 @@ import { Card, CardHeader, CardBody, CardFooter, Text, Input } from '@chakra-ui/
 import Image from 'next/image';
 import { BiMessageRoundedDots } from 'react-icons/bi';
 
-export const CreateScreen = () => {
+export default function CreateScreen() {
   return (
     <Flex
       h={'100vh'}
@@ -123,4 +123,4 @@ export const CreateScreen = () => {
       </Grid>
     </Flex>
   );
-};
+}
