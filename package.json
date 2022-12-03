@@ -24,6 +24,7 @@
     "@chakra-ui/react": "^2.3.6",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@etherspot/react-transaction-buidler": "^0.21.0",
     "@safe-global/safe-core-sdk": "^3.2.0",
     "@types/node": "18.11.10",
     "@types/react": "18.0.26",
