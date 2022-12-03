@@ -4,9 +4,10 @@ import { Etherspot, TRANSACTION_BLOCK_TYPE } from '@etherspot/react-transaction-
 import { AuthScreen } from '../screens/auth';
 import { DashboardScreen } from '../screens/dashboard';
 import { ethers } from 'ethers';
+import { useAuthContext } from '../contexts/AuthContext';
 
 export default function Home() {
-  const [connectedProvider, setConnectedProvider] = useState<ethers.providers.Web3Provider | null>(null);
+  const {address, ethProvider} = useAuthContext();
   return (
     <div>
       <Head>
@@ -20,7 +21,7 @@ export default function Home() {
           href="/favicon.ico"
         />
       </Head>
-      <main>{connectedProvider != null ? <DashboardScreen /> : <AuthScreen setConnectedProvider={setConnectedProvider} />}</main>
+      <main>{address != null ? <DashboardScreen /> : <AuthScreen />}</main>
     </div>
   );
 }

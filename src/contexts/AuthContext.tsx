@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: any) => {
     if (!web3AuthCore) {
       initWeb3Auth();
     }
-  });
+  },[]);
 
   const connectWithGoogle = useCallback(async () => {
     if (addressState) return;
@@ -72,7 +72,6 @@ export const AuthProvider = ({ children }: any) => {
       const signer = web3Provider.getSigner();
       const address = await signer.getAddress();
       setAddressState(address);
-      console.log(address);
     }
   }, [web3AuthCore]);
 
