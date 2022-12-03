@@ -4,8 +4,10 @@ import copy from 'copy-to-clipboard';
 
 import { IoMdWallet } from 'react-icons/io';
 import { FiCopy } from 'react-icons/fi';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 export default function Dashboard() {
+  const obj = [1, 2, 3];
   return (
     <Flex direction={'column'}>
       <Flex
@@ -29,7 +31,7 @@ export default function Dashboard() {
           <IconButton
             pt={0}
             pl={300}
-            variant="outline"
+            variant="unStyle"
             fontSize="30px"
             h="50%"
             w="100%"
@@ -79,12 +81,10 @@ export default function Dashboard() {
               0x124...36484
             </Badge>
             <IconButton
-              mt={-50}
+              mt={0}
               ml={-3}
-              variant="outline"
+              variant="unstyle"
               fontSize="10px"
-              h="50%"
-              w="100%"
               aria-label="Copy icon"
               onClick={() => {
                 copy('Text');
@@ -125,54 +125,9 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem
-          rowSpan={4}
-          colSpan={5}
-        >
-          <Card
-            bg={'#333333'}
-            overflow="hidden"
-          >
-            <CardFooter
-              justify="space-between"
-              flexWrap="wrap"
-              flexDirection={'row'}
-              sx={{
-                '& > button': {
-                  minW: '10px',
-                },
-              }}
-            >
-              <Text color={'white'}>Friends Suprise</Text>
-              <Button mt={-2}>$ 500</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem
-          rowSpan={4}
-          colSpan={5}
-        >
-          <Card
-            bg={'#333333'}
-            overflow="hidden"
-          >
-            <CardFooter
-              justify="space-between"
-              flexWrap="wrap"
-              flexDirection={'row'}
-              sx={{
-                '& > button': {
-                  minW: '10px',
-                },
-              }}
-            >
-              <Text color={'white'}>Moms Birthday Gift</Text>
-              <Button mt={-2}>$ 500</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
       </Grid>
-      <Button
+
+      <IconButton
         variant={'floating'}
         pos="fixed"
         w="50px"
@@ -180,9 +135,9 @@ export default function Dashboard() {
         bg={'#c9f99c'}
         ml={'47vh'}
         mt={'90vh'}
-      >
-        +
-      </Button>
+        aria-label="add btn"
+        icon={<AiOutlinePlus />}
+      ></IconButton>
     </Flex>
   );
 }
