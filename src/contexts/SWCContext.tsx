@@ -27,10 +27,15 @@ export const SWCProvider = ({ children }: any) => {
         const smartAccount = new SmartAccount(ethProvider, {
           activeNetworkId: ChainId.POLYGON_MUMBAI,
           supportedNetworksIds: [ChainId.POLYGON_MUMBAI],
+          networkConfig: [
+            {
+              chainId: ChainId.POLYGON_MUMBAI,
+              dappAPIKey: '59fRCMXvk.8a1652f0-b522-4ea7-b296-98628499aee3'
+            },
+          ],
         });
         await smartAccount.init();
-
-        console.log("smartAccount" , smartAccount);
+        console.log('smartAccount', smartAccount);
         const context = smartAccount.getSmartAccountContext();
         setScwAddress(context.baseWallet.getAddress());
         setSmartAccount(smartAccount);
