@@ -20,6 +20,8 @@
     ]
   },
   "dependencies": {
+    "@biconomy/smart-account": "^0.0.4",
+    "@biconomy/web3-auth": "^0.0.4",
     "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.6",
     "@emotion/react": "^11.10.5",

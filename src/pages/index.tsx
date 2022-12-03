@@ -1,10 +1,8 @@
 import Head from 'next/head';
-import { useState } from 'react';
-import { Etherspot, TRANSACTION_BLOCK_TYPE } from '@etherspot/react-transaction-buidler';
 import { AuthScreen } from '../screens/auth';
 import { DashboardScreen } from '../screens/dashboard';
-import { ethers } from 'ethers';
 import { useAuthContext } from '../contexts/AuthContext';
+import dynamic from 'next/dynamic';
 
 export default function Home() {
   const {address, ethProvider} = useAuthContext();
