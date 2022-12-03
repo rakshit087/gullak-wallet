@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import { Web3AuthCore } from '@web3auth/core';
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import {useRouter} from "next/router";
 
 interface authContextType {
   ethProvider: ethers.providers.Web3Provider | null;
@@ -23,6 +24,7 @@ export const AuthProvider = ({ children }: any) => {
   const [web3AuthCore, setWeb3AuthCore] = useState<Web3AuthCore | null>(null);
   const [provider, setProvider] = useState<any>();
   const [account, setAccount] = useState<string>();
+  const router = useRouter();
 
   const initWeb3AuthCore = useCallback(async () => {
     if (typeof window === 'undefined') return;
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }: any) => {
       setProvider(web3Provider);
       const accounts = await web3Provider.listAccounts();
       setAccount(accounts[0]);
+      return;
     }
     if (web3AuthCore) {
       return web3AuthCore;
@@ -73,7 +76,15 @@ export const AuthProvider = ({ children }: any) => {
     });
     web3AuthCore?.configureAdapter(adapter);
     await web3AuthCore?.init();
-    await web3AuthCore?.connectTo(adapter.name, { loginProvider: 'google' });
+    try {
+      const user = await web3AuthCore?.getUserInfo();
+      if(user?.email){
+        await web3AuthCore?.logout()
+        await web3AuthCore?.connectTo(adapter.name, { loginProvider: 'google' });
+      } 
+    } catch {
+      await web3AuthCore?.connectTo(adapter.name, { loginProvider: 'google' });
+    }
   }, [web3AuthCore]);
 
   const connectWithTwitter = useCallback(async () => {

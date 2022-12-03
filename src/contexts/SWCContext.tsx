@@ -19,12 +19,10 @@ export const SWCProvider = ({ children }: any) => {
   const { ethProvider, address } = useAuthContext();
   const [smartAccount, setSmartAccount] = useState<SmartAccount | null>(null);
   const [scwAddress, setScwAddress] = useState('');
-  const [scwLoading, setScwLoading] = useState(false);
 
   useEffect(() => {
     async function setupSmartAccount() {
       setScwAddress('');
-      setScwLoading(true);
       if (!!address && !!ethProvider) {
         const smartAccount = new SmartAccount(ethProvider, {
           activeNetworkId: ChainId.POLYGON_MUMBAI,
@@ -35,9 +33,9 @@ export const SWCProvider = ({ children }: any) => {
         setScwAddress(context.baseWallet.getAddress());
         setSmartAccount(smartAccount);
       }
-      setScwLoading(false);
     }
     if (!!address && !!ethProvider) {
+      console.log(address);
       setupSmartAccount();
     }
   }, [ethProvider, address]);

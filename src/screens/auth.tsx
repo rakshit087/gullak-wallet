@@ -36,13 +36,13 @@ export const AuthScreen = () => {
       <Button
         colorScheme="twitter"
         leftIcon={<FaTwitter />}
-        // onClick={async () => {
-        //   await connectTwitter();
-        // }}
+        onClick={async () => {
+          await connectTwitter();
+        }}
         width={72}
         borderRadius={32}
       >
-        {/* <SocialLoginDynamic /> */}
+        Continue with Twitter
       </Button>
     </Flex>
   );
