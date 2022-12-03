@@ -1,6 +1,6 @@
 import { Button, Flex } from '@chakra-ui/react';
 import { FaGoogle } from 'react-icons/fa';
-// import { loginWithTwitter } from '../services/auth';
+import { loginWithGoogle, loginWithTwitter } from '../services/autentication';
 
 export default function AuthPage() {
   return (
@@ -15,10 +15,19 @@ export default function AuthPage() {
         colorScheme="gray"
         leftIcon={<FaGoogle />}
         onClick={() => {
-          // loginWithTwitter();
+          loginWithGoogle();
         }}
       >
         Continue with Google
+      </Button>
+      <Button
+        colorScheme="twitter"
+        leftIcon={<FaGoogle />}
+        onClick={() => {
+          loginWithTwitter();
+        }}
+      >
+        Continue with Twitter
       </Button>
     </Flex>
   );
