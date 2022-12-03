@@ -1,5 +1,6 @@
 import Safe, { SafeFactory, SafeAccountConfig } from '@safe-global/safe-core-sdk'
 import ethers from "ethers";
+import EthersAdapter from "@safe-global/safe-ethers-lib";
 
 /*
 Create safe basically creates a multisig with the given addresses
@@ -71,7 +72,23 @@ function generateTransaction(to, opts) {
   };
 }
 
+export function getJsonRpcProvider() {
+  return new ethers.providers.JsonRpcProvider();
+}
+
+export function getAdapter(account: any) {
+  const signer = getJsonRpcProvider().getSigner(account);
+  return new EthersAdapter({ ethers, signer: signer })
+}
+
 export async function main() {
+  const accounts = [
+    process.env.ACCOUNT_1,
+    process.env.ACCOUNT_2,
+    process.env.ACCOUNT_7,
+  ];
+
+  /*
   const ceo = process.env.ACCOUNT_1;
   const cto = process.env.ACCOUNT_2;
   const meme_artist = process.env.ACCOUNT_3;
@@ -79,28 +96,21 @@ export async function main() {
   const advisor = process.env.ACCOUNT_5;
   const investor = process.env.ACCOUNT_6;
   const yacht_shop = process.env.ACCOUNT_7;
-  
-  // A provider is an Ethereum connection object
-  const provider = new ethers.providers.JsonRpcProvider();
-  
-  const ceo_signer = provider.getSigner(ceo);
-  const cto_signer = provider.getSigner(cto);
-  const advisor_signer = provider.getSigner(advisor);
-  
+  */
+
   // The Gnosis safe contract works with the ethers.js library
   // so we need an adapter that works with ether.js
   // We need an adapter for every signer
-  const EthersAdapter = require("@gnosis.pm/safe-ethers-lib")["default"];
-  const ethAdapter_ceo = new EthersAdapter({ ethers, signer: ceo_signer });
-  const ethAdapter_cto = new EthersAdapter({ ethers, signer: cto_signer });
-  const ethAdapter_advisor = new EthersAdapter({ ethers, signer: advisor_signer });
+  const adapters = accounts.map(account => getAdapter(account));
   // shared with everyone who wants to get the Safe object
-  const contractNetworks = await getContractNetworks(ethAdapter_ceo);
-  const safeSdk_ceo = await createSafe(
-    ethAdapter_ceo,
-    [ceo, cto, meme_artist, solidity_engineer, advisor],
+  // TODO: see if adapters or accounts should have a better structure
+  const contractNetworks = await getContractNetworks(adapters[0]);
+  const safeSdk_ceo = await createAndDeploySafe(
+    adapters[0],
+    accounts,
     contractNetworks,
   );
+
   const treasury = safeSdk_ceo.getAddress();
 
   const ten_ethers = ethers.utils.parseUnits("10", "ether").toHexString();
