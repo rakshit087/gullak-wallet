@@ -52,8 +52,7 @@ export const AuthProvider = ({ children }: any) => {
       adapterSettings: {
         network: 'testnet',
         clientId: 'BDBRmPiihu9XDyawpU1xXD2wVpEg_XG1ZNsz2RVc910qTU-MrMvuVig6khEBNSGxJw5bjjywcZQO7GdjcwrJhAM',
-        uxMode: 'redirect',
-        redirectUrl: 'http://localhost:3000/dashboard',
+        uxMode: 'popup',
         loginConfig: {
           google: {
             name: 'google auth',
@@ -82,8 +81,7 @@ export const AuthProvider = ({ children }: any) => {
       adapterSettings: {
         network: 'testnet',
         clientId: 'BDBRmPiihu9XDyawpU1xXD2wVpEg_XG1ZNsz2RVc910qTU-MrMvuVig6khEBNSGxJw5bjjywcZQO7GdjcwrJhAM',
-        redirectUrl: 'http://localhost:3000/dashboard',
-        uxMode: 'redirect',
+        uxMode: 'popup',
         loginConfig: {
           jwt: {
             name: 'any name',
