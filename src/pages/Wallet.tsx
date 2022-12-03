@@ -1,4 +1,5 @@
 import { Badge, Box, Flex, IconButton, Button, Grid, GridItem, Heading } from '@chakra-ui/react';
+
 import {
   Card,
   CardHeader,
@@ -22,6 +23,7 @@ import { FiCopy } from 'react-icons/fi';
 import Image from 'next/image';
 import { BiMessageRoundedDots } from 'react-icons/bi';
 import { useDisclosure } from '@chakra-ui/react';
+import React from 'react';
 
 export default function WalletScreen() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -183,37 +185,40 @@ export default function WalletScreen() {
             w="100%"
             h="12"
             ml={13}
+            onClick={onOpen}
           >
             Send Funds
           </Button>
+
           <Modal
             initialFocusRef={initialRef}
             finalFocusRef={finalRef}
             isOpen={isOpen}
             onClose={onClose}
+            colorScheme={'blue'}
           >
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Create your account</ModalHeader>
+              <ModalHeader>Send Money</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
                 <FormControl>
-                  <FormLabel>First name</FormLabel>
+                  <FormLabel>Amount</FormLabel>
                   <Input
                     ref={initialRef}
-                    placeholder="First name"
+                    placeholder="Enter Amount"
                   />
                 </FormControl>
 
                 <FormControl mt={4}>
-                  <FormLabel>Last name</FormLabel>
-                  <Input placeholder="Last name" />
+                  <FormLabel>Recipient Address</FormLabel>
+                  <Input placeholder="Enter Address" />
                 </FormControl>
               </ModalBody>
 
               <ModalFooter>
                 <Button
-                  colorScheme="blue"
+                  bg={'#c9f99c'}
                   mr={3}
                 >
                   Save
