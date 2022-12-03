@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, CardFooter, Text, Input } from '@chakra-ui/
 import Image from 'next/image';
 import { BiMessageRoundedDots } from 'react-icons/bi';
 
-export const GroupScreen = () => {
+export default function GroupScreen() {
   return (
     <Flex
       h={'100vh'}
@@ -163,4 +163,4 @@ export const GroupScreen = () => {
       </Grid>
     </Flex>
   );
-};
+}
