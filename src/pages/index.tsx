@@ -1,12 +1,10 @@
-import { Badge, Box, Flex, IconButton, Button, Grid, GridItem } from '@chakra-ui/react';
-import { Card, CardHeader, CardBody, CardFooter, Text } from '@chakra-ui/react';
-import copy from 'copy-to-clipboard';
-import { IoMdWallet } from 'react-icons/io';
-import { FiCopy } from 'react-icons/fi';
+import { Flex, IconButton, Button, Grid, GridItem } from '@chakra-ui/react';
+import { Card, CardFooter, Text } from '@chakra-ui/react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useAuthContext } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { WalletBox } from '../components/WalletBox';
 import Link from 'next/link';
 
 export default function DashboardScreen() {
@@ -23,85 +21,8 @@ export default function DashboardScreen() {
         h={'100vh'}
         bgColor={'#252528'}
         w={'full'}
-        justifyContent={'center'}
-        alignItems={'center'}
       >
-        <Box
-          bg="#c9f99c"
-          h="50%"
-          w="100%"
-          p={4}
-          borderRadius="3xl"
-          overflow="hidden"
-          boxSize="60vh"
-          mt={-400}
-          color="black"
-        >
-          <IconButton
-            pt={0}
-            pl={300}
-            variant="unStyle"
-            fontSize="30px"
-            h="50%"
-            w="100%"
-            aria-label="Wallet icon"
-            icon={<IoMdWallet />}
-          ></IconButton>
-          <Box
-            w="100%"
-            pl={4}
-            fontSize="xl"
-            fontWeight="bold"
-            color="black"
-          >
-            <Badge
-              bg="#c9f99c"
-              fontSize="2em"
-              color="black"
-            >
-              $ 500
-            </Badge>
-          </Box>
-          <Box
-            w="100%"
-            pt={75}
-            pl={110}
-          >
-            <Badge
-              bg="#c9f99c"
-              fontSize="12px"
-              fontWeight={0.8}
-            >
-              Wallet Address
-            </Badge>
-          </Box>
-          <Box
-            w="100%"
-            pt={0}
-            mt="-1"
-            pl={118}
-          >
-            <Badge
-              bg="#c9f99c"
-              fontSize="12px"
-              as={'p'}
-              className="txt"
-            >
-              0x124...36484
-            </Badge>
-            <IconButton
-              mt={0}
-              ml={-3}
-              variant="unstyle"
-              fontSize="10px"
-              aria-label="Copy icon"
-              onClick={() => {
-                copy('Text');
-              }}
-              icon={<FiCopy />}
-            ></IconButton>
-          </Box>
-        </Box>
+        <WalletBox />
       </Flex>
       <Grid
         h="200px"
