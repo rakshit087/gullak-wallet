@@ -23,8 +23,7 @@ export default function AuthPage() {
         colorScheme="gray"
         leftIcon={<FaGoogle />}
         onClick={() => {
-          const authService = new AuthService();
-          authService.googleLogin();
+          new AuthService("google");
         }}
         width={72}
         borderRadius={32}
@@ -36,8 +35,7 @@ export default function AuthPage() {
         colorScheme="twitter"
         leftIcon={<FaTwitter />}
         onClick={() => {
-          const authService = new AuthService();
-          authService.twitterLogin();
+          new AuthService("twitter")
         }}
         width={72}
         borderRadius={32}

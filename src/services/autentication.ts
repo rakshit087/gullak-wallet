@@ -2,7 +2,8 @@ import { Web3AuthCore } from '@web3auth/core';
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter';
 
 export class AuthService {
-  web3authCore: Web3AuthCore;
+  web3authCore: Web3AuthCore
+  loginType: string | null;
   constructor() {
     this.web3authCore = new Web3AuthCore({
       clientId: 'BDBRmPiihu9XDyawpU1xXD2wVpEg_XG1ZNsz2RVc910qTU-MrMvuVig6khEBNSGxJw5bjjywcZQO7GdjcwrJhAM',
@@ -16,6 +17,7 @@ export class AuthService {
         tickerName: 'Matic',
       },
     });
+    this.loginType = null;
   }
   googleLogin = async () => {
     const adapter = new OpenloginAdapter({
@@ -36,6 +38,23 @@ export class AuthService {
     this.web3authCore.configureAdapter(adapter);
     await this.web3authCore.init();
   };
+  invokeLogin = async (loginType: string | null) => {
+    this.loginType = loginType;
+    switch(loginType) {
+      case "google":
+        await this.googleLogin();
+        break;
+      case "twitter":
+        await this.twitterLogin();
+        break;
+    }
+  };
+  getProvider = async () => {
+    if(!this.web3authCore.provider) {
+      await this.invokeLogin(this.loginType);
+    }
+    return this.web3authCore.provider;
+  }
   twitterLogin = async () => {
     const adapter = new OpenloginAdapter({
       adapterSettings: {
