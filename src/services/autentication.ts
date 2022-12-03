@@ -18,7 +18,7 @@ export const loginWithGoogle = async () => {
     adapterSettings: {
       network: 'testnet',
       clientId: 'BDBRmPiihu9XDyawpU1xXD2wVpEg_XG1ZNsz2RVc910qTU-MrMvuVig6khEBNSGxJw5bjjywcZQO7GdjcwrJhAM',
-      uxMode: 'redirect', // other option: popup
+      uxMode: 'redirect',
       loginConfig: {
         google: {
           name: 'google auth',
@@ -52,7 +52,7 @@ export const loginWithTwitter = async () => {
       network: 'testnet',
       clientId: 'BDBRmPiihu9XDyawpU1xXD2wVpEg_XG1ZNsz2RVc910qTU-MrMvuVig6khEBNSGxJw5bjjywcZQO7GdjcwrJhAM',
       redirectUrl: 'https://localhost:3000/dashboard',
-      uxMode: 'redirect', // other option: popup
+      uxMode: 'redirect',
       loginConfig: {
         jwt: {
           name: 'any name',
@@ -66,8 +66,6 @@ export const loginWithTwitter = async () => {
   web3authCore.configureAdapter(adapter);
   await web3authCore.init();
 
-  // call below code when user clicks on login button
-  // it will use auth0 login with openlogin's authentication
   await web3authCore.connectTo(adapter.name, {
     loginProvider: 'jwt',
     extraLoginOptions: {
