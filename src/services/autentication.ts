@@ -38,6 +38,7 @@ export class AuthService {
     this.web3authCore.configureAdapter(adapter);
     await this.web3authCore.init();
   };
+  
   invokeLogin = async (loginType: string | null) => {
     this.loginType = loginType;
     switch(loginType) {
@@ -49,12 +50,14 @@ export class AuthService {
         break;
     }
   };
+
   getProvider = async () => {
     if(!this.web3authCore.provider) {
       await this.invokeLogin(this.loginType);
     }
     return this.web3authCore.provider;
   }
+  
   twitterLogin = async () => {
     const adapter = new OpenloginAdapter({
       adapterSettings: {
