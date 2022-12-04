@@ -15,6 +15,11 @@ import { useToast } from '@chakra-ui/react';
 import { Card, CardHeader, CardBody, CardFooter, Text, Input } from '@chakra-ui/react';
 import Image from 'next/image';
 import { BiMessageRoundedDots } from 'react-icons/bi';
+import { createGoal } from '../services/goal';
+
+function createGroup() {
+
+}
 
 export default function CreateScreen() {
   const toast = useToast();
@@ -65,26 +70,38 @@ export default function CreateScreen() {
           rowSpan={4}
           colSpan={5}
         >
-          <InputGroup>
+          <Input
+            bg={'#333333'}
+            p={'17px'}
+            margin="4px"
+            color={'white'}
+            variant="unstyled"
+            placeholder="Enter Name"
+            overflow="hidden"
+            fontSize={'20px'}
+            _placeholder={{ opacity: 1, color: 'gray.500' }}
+          />
+         </GridItem>
+         <GridItem
+          rowSpan={5}
+          colSpan={5}
+        >
             <Input
-              bg={'#333333'}
-              p={'17px'}
-              color={'white'}
-              variant="unstyled"
-              placeholder="Enter Address"
-              overflow="hidden"
-              fontSize={'20px'}
-              _placeholder={{ opacity: 1, color: 'gray.500' }}
-            />
-            <InputRightElement width="4.5rem">
+            bg={'#333333'}
+            p={'17px'}
+            color={'white'}
+            variant="unstyled"
+            placeholder="Enter Address"
+            overflow="hidden"
+            fontSize={'20px'}
+            _placeholder={{ opacity: 1, color: 'gray.500' }}
+          />
               <Button
                 bg="#c9f99c"
                 mt={6}
               >
                 +
               </Button>
-            </InputRightElement>
-          </InputGroup>
         </GridItem>
 
         <GridItem
@@ -119,7 +136,7 @@ export default function CreateScreen() {
             bg="#c9f99c"
             size="lg"
             ml={'5rem'}
-            onClick={() =>
+            onClick={async () =>
               toast({
                 title: 'Group created.',
                 description: "We've created your Group Sucessfully.",

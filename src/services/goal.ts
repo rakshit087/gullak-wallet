@@ -14,10 +14,11 @@ export async function createGoal(name: string, addresses: Array<string>): any {
   // save the userPrivate/public id: name: address
   const goal:any = {};
   goal[id] = {name, addresses};
+  console.log("created goal: ", goal);
   return goal;
 }
 
-export function listGoals() {
+export async function listGoals() {
   // call gnosis to fetch all safes/groups the accounts the main wallet is involved with
   // TODO: look at how
   return

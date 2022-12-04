@@ -27,6 +27,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@etherspot/react-transaction-buidler": "^0.21.0",
+    "@pushprotocol/restapi": "^0.2.2",
     "@safe-global/safe-core-sdk": "^3.2.0",
     "@safe-global/safe-ethers-lib": "^1.7.0",
     "@types/node": "18.11.10",
