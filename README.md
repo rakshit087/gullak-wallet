@@ -9,6 +9,8 @@ npm run dev
 # or
 yarn dev
 ```
+Deployed link: https://gullak123--gullak.on.valist.io/
+Notion Detail Link: https://www.notion.so/Pitch-9e6f60e4d78643c7be9a0c314db51e26
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
