@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { WalletBox } from '../components/WalletBox';
 import Link from 'next/link';
+import { groupData } from '../data/groups';
 
 export default function DashboardScreen() {
   const { address } = useAuthContext();
@@ -36,24 +37,27 @@ export default function DashboardScreen() {
           rowSpan={4}
           colSpan={5}
         >
-          <Card
-            bg={'#333333'}
-            overflow="hidden"
-          >
-            <CardFooter
-              justify="space-between"
-              flexWrap="wrap"
-              flexDirection={'row'}
-              sx={{
-                '& > button': {
-                  minW: '10px',
-                },
-              }}
+          {groupData.map((group) => (
+            <Card
+              bg={'#333333'}
+              overflow="hidden"
+              mb={4}
             >
-              <Text color={'white'}>Trip to Goa</Text>
-              <Button mt={-2}>$ 500</Button>
-            </CardFooter>
-          </Card>
+              <CardFooter
+                justify="space-between"
+                flexWrap="wrap"
+                flexDirection={'row'}
+                sx={{
+                  '& > button': {
+                    minW: '10px',
+                  },
+                }}
+              >
+                <Text color={'white'}>{group.name}</Text>
+                <Button mt={-2}>$ {group.amount}</Button>
+              </CardFooter>
+            </Card>
+          ))}
         </GridItem>
       </Grid>
       <Link href="/Create">
