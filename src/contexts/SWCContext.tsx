@@ -36,8 +36,7 @@ export const SWCProvider = ({ children }: any) => {
         });
         await smartAccount.init();
         console.log('smartAccount', smartAccount);
-        const context = smartAccount.getSmartAccountContext();
-        setScwAddress(context.baseWallet.getAddress());
+        setScwAddress(smartAccount?.address);
         setSmartAccount(smartAccount);
       }
     }
