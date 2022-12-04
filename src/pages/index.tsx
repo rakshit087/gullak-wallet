@@ -7,6 +7,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { useAuthContext } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 export default function DashboardScreen() {
   const { address } = useAuthContext();
@@ -134,18 +135,19 @@ export default function DashboardScreen() {
           </Card>
         </GridItem>
       </Grid>
-
-      <IconButton
-        variant={'floating'}
-        pos="fixed"
-        w="50px"
-        h="50px"
-        bg={'#c9f99c'}
-        ml={'47vh'}
-        mt={'90vh'}
-        aria-label="add btn"
-        icon={<AiOutlinePlus />}
-      ></IconButton>
+      <Link href="/Create">
+        <IconButton
+          variant={'floating'}
+          pos="fixed"
+          w="50px"
+          h="50px"
+          bg={'#c9f99c'}
+          ml={'47vh'}
+          mt={'2vh'}
+          aria-label="add btn"
+          icon={<AiOutlinePlus />}
+        ></IconButton>
+      </Link>
     </Flex>
   );
 }

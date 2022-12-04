@@ -10,11 +10,14 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
+
 import { Card, CardHeader, CardBody, CardFooter, Text, Input } from '@chakra-ui/react';
 import Image from 'next/image';
 import { BiMessageRoundedDots } from 'react-icons/bi';
 
 export default function CreateScreen() {
+  const toast = useToast();
   return (
     <Flex
       h={'100vh'}
@@ -116,6 +119,15 @@ export default function CreateScreen() {
             bg="#c9f99c"
             size="lg"
             ml={'5rem'}
+            onClick={() =>
+              toast({
+                title: 'Group created.',
+                description: "We've created your Group Sucessfully.",
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+              })
+            }
           >
             Create Group
           </Button>
