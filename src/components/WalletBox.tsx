@@ -10,26 +10,19 @@ import { useEffect, useState } from 'react';
 
 export const WalletBox = () => {
   const { scwAccount, scwAddress } = useSWCContext();
+  const [scwAccountBal, setScwAccountBal] = useState<any>(null);
 
-  const getBalances = async () => {
+  useEffect(() => {
     if (scwAccount) {
       const balanceParams: BalancesDto = {
         chainId: ChainId.POLYGON_MUMBAI, // chainId of your choice
         eoaAddress: scwAccount?.address,
-        tokenAddresses: [],
+        tokenAddresses: ["0xe7863D24948D223678F47A45987Ff05786BE0e72"],
       };
-      const usdBalFromSdk = await scwAccount.getTotalBalanceInUsd(balanceParams);
-      console.log()
-      return usdBalFromSdk;
+      scwAccount.getAlltokenBalances(balanceParams).then((resData)=>{
+        setScwAccountBal(((resData.data[0].balance/1e18).toFixed(2)).toString())
+      });
     }
-    return null;
-  };
-
-  const [scwAccountBal, setScwAccountBal] = useState<any>("0");
-
-  useEffect(() => {
-    const bal = getBalances();
-    setScwAccountBal(bal);
   }, [scwAccount, scwAddress]);
 
   return (
@@ -57,47 +50,49 @@ export const WalletBox = () => {
         />
       </Flex>
       {/* Account Balance */}
-      <Flex>
-          <Text fontSize={'5xl'}>$</Text>
+      <Flex ml={6}>
+        <Text fontSize={'5xl'}>$</Text>
+        {(scwAccountBal) ? <Text
+          fontSize={'6xl'}
+          fontWeight={'semibold'}
+          fontFamily={'mono'}
+        >
+          {scwAccountBal}
+        </Text> : <SkeletonText noOfLines={1} height={4} colorScheme={"gray"} />}
+      </Flex>
+      <Box
+        marginX={'auto'}
+        mb={4}
+        textAlign={'center'}
+      >
+        <Text fontSize={'sm'}>Wallet Address</Text>
+        <Flex alignItems={'center'}>
           <Text
-            fontSize={'6xl'}
+            fontSize={'xs'}
             fontWeight={'semibold'}
           >
-            {scwAccountBal.toString()}
+            {scwAddress ? (
+              scwAddress.slice(0, 5) + '...' + scwAddress.slice(-4)
+            ) : (
+              <SkeletonText
+                size={'sm'}
+                noOfLines={1}
+                colorScheme={"gray"}
+              />
+            )}
           </Text>
+          <IconButton
+            height={'10px'}
+            variant="unstyle"
+            fontSize="10px"
+            aria-label="Copy icon"
+            onClick={() => {
+              copy(scwAddress);
+            }}
+            icon={<FiCopy />}
+          ></IconButton>
         </Flex>
-      <Box>
-        <Text>Wallet Address</Text>
       </Box>
-      {/* <Box>
-        <Text>Wallet Address</Text>
-      </Box>
-      <Box
-        w="100%"
-        pt={0}
-        mt="-1"
-        pl={118}
-      >
-        <Badge
-          bg="#c9f99c"
-          fontSize="12px"
-          as={'p'}
-          className="txt"
-        >
-          0x124...36484
-        </Badge>
-        <IconButton
-          mt={0}
-          ml={-3}
-          variant="unstyle"
-          fontSize="10px"
-          aria-label="Copy icon"
-          onClick={() => {
-            copy('Text');
-          }}
-          icon={<FiCopy />}
-        ></IconButton> */}
-      {/* </Box> */}
     </Flex>
   );
 };
