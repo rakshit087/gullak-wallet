@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import { WalletBox } from '../components/WalletBox';
 import Link from 'next/link';
 import { groupData } from '../data/groups';
+import * as dotenv from 'dotenv';
+dotenv.config()
 
 export default function DashboardScreen() {
   const { address } = useAuthContext();
