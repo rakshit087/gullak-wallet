@@ -2,8 +2,8 @@ import * as PushAPI from "@pushprotocol/restapi";
 import * as ethers from "ethers";
 
 
-const PK = 'your_channel_address_secret_key'; // channel private key
-const Pkey = `0x${PK}`;
+const PK = process.env.PUSH_CHANNEL_PRIVATE_KEY; // channel private key
+const Pkey = `0x${process.env.PK}`;
 const signer = new ethers.Wallet(Pkey);
 
 export const sendNotification = async(goal) => {
